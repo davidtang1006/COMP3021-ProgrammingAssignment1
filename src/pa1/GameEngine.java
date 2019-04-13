@@ -9,16 +9,13 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.function.Function;
 
-
 /**
  * Implements the game logic
  */
 public class GameEngine {
-
     private GameMap gameMap = new GameMap();
     private int turns;
     private Scanner userInputScanner = new Scanner(System.in);
-
 
     /**
      * Determine if the game is over by checking if there is exactly one player with at least one city
@@ -27,17 +24,27 @@ public class GameEngine {
      */
     public boolean isGameOver() {
         // TODO
-
+        for (Player player : gameMap.getPlayers()) {
+            if (player.getCities().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
      * Get the the only player with at least one city
      *
-     * @return
+     * @return the only player with at least one city
      */
     public Player getWinner() {
         // TODO
-
+        for (Player player : gameMap.getPlayers()) {
+            if (!player.getCities().isEmpty()) {
+                return player;
+            }
+        }
+        return null;
     }
 
     private int getSelection(int min, int max, String name) {
@@ -107,7 +114,6 @@ public class GameEngine {
                 break;
             }
         }
-
         return m;
     }
 
@@ -122,7 +128,6 @@ public class GameEngine {
     }
 
     private void selectAndPerformAction(Player player, Minister minister, City city) {
-
         Cost bankCost = city.getBankCost().getDiscountedCost(minister.getImprovementDiscountRate());
         Cost roadCost = city.getRoadCost().getDiscountedCost(minister.getImprovementDiscountRate());
         Cost uniCost = city.getUniversityCost().getDiscountedCost(minister.getImprovementDiscountRate());
@@ -249,9 +254,7 @@ public class GameEngine {
         System.out.println(gameMap);
     }
 
-
     public static void main(String args[]) throws IOException {
-
         GameEngine game = new GameEngine();
 
         game.gameMap.loadMap("map.txt");
@@ -263,6 +266,5 @@ public class GameEngine {
 
         Player winner = game.getWinner();
         System.out.printf("Player %s wins the game", winner.getName());
-
     }
 }
