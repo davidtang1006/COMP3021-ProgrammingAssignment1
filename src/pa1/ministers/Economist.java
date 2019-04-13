@@ -51,6 +51,13 @@ public class Economist extends Minister {
     @Override
     public void improveCropYield(Player player, City city) throws TooPoorException {
         // TODO
+        // If player has less than 500 golds, throw a TooPoorException, the cost is (gold: 500, production: 0, science: 0)
+        if (player.getGold() < 500) {
+            Cost c = new Cost(500, 0, 0);
+            throw new TooPoorException(player, c);
+        }
+        player.addGold(-500);
+        city.improveCrops(50 + Math.round((intelligence + experience + leadership) * 0.2f));
     }
 
     /**

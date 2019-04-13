@@ -1,6 +1,5 @@
 package pa1.ministers;
 
-
 import pa1.City;
 import pa1.Cost;
 import pa1.GameMap;
@@ -16,7 +15,6 @@ import java.util.List;
  * Therefore this class will contain the bulk of your implementation of the game.
  */
 public abstract class Minister {
-
     // Attributes
     protected final int intelligence, experience, leadership;
 
@@ -56,7 +54,6 @@ public abstract class Minister {
         // TODO
     }
 
-
     /**
      * Collect gold from a city
      * amount collected = (city population + minister experience + minister leadership) * (# of banks  + 1) * 0.2
@@ -78,7 +75,6 @@ public abstract class Minister {
     public int collectSciencePoints(City city) {
         // TODO
     }
-
 
     /**
      * Collect production points from a city
@@ -188,8 +184,14 @@ public abstract class Minister {
      */
     public void improveCropYield(Player player, City city) throws TooPoorException {
         // TODO
+        // If player has less than 500 golds, throw a TooPoorException, the cost is (gold: 500, production: 0, science: 0)
+        if (player.getGold() < 500) {
+            Cost c = new Cost(500, 0, 0);
+            throw new TooPoorException(player, c);
+        }
+        player.addGold(-500);
+        city.improveCrops(50);
     }
-
 
     /**
      * Recruit troops to be stationed in a city
@@ -204,6 +206,13 @@ public abstract class Minister {
      */
     public void recruitTroops(Player player, City city) throws TooPoorException {
         // TODO
+        // If player has less than 500 golds, throw a TooPoorException, the cost is (gold: 500, production: 0, science: 0)
+        if (player.getGold() < 500) {
+            Cost c = new Cost(500, 0, 0);
+            throw new TooPoorException(player, c);
+        }
+        player.addGold(-500);
+        city.addTroops(50);
     }
 
     /**

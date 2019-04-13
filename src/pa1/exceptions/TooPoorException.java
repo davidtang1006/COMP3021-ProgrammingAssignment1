@@ -7,8 +7,7 @@ import pa1.Player;
  * Exception thrown when player does not have enough currencies to afford a cost
  */
 // TODO: correctly define the exception class
-public class TooPoorException {
-
+public class TooPoorException extends Exception {
     private final Cost cost;
     private final int playerGolds;
     private final int playerProductionPoints;
@@ -36,5 +35,7 @@ public class TooPoorException {
     @Override
     public String getMessage() {
         // TODO
+        return String.format("need (%d golds, %d production points, %d science points), have (%d golds, %d production points, %d science points)",
+                cost.getGold(), cost.getProduction(), cost.getScience(), playerGolds, playerProductionPoints, playerSciencePoints);
     }
 }

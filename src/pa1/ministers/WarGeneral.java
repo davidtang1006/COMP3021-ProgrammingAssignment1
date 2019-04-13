@@ -45,11 +45,12 @@ public class WarGeneral extends Minister {
     @Override
     public void recruitTroops(Player player, City city) throws TooPoorException {
         // TODO
-        if (player.getGold() > 500) {
+        if (player.getGold() >= 500) {
             player.addGold(-500);
             city.addTroops(50 + Math.round((float) leadership * 0.2f));
         } else {
-            /* ... */
+            Cost c = new Cost(500, 0, 0);
+            throw new TooPoorException(player, c);
         }
     }
 
