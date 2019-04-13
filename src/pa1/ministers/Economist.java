@@ -1,21 +1,21 @@
 package pa1.ministers;
 
-
 import pa1.City;
 import pa1.Cost;
 import pa1.Player;
 import pa1.exceptions.TooPoorException;
 
 public class Economist extends Minister {
-
     /**
      * Call the superclass' constructor
+     *
      * @param intelligence
      * @param experience
      * @param leadership
      */
     public Economist(int intelligence, int experience, int leadership) {
         // TODO
+        super(intelligence, experience, leadership);
     }
 
     /**
@@ -24,6 +24,7 @@ public class Economist extends Minister {
     @Override
     public double getImprovementDiscountRate() {
         // TODO
+        return (1 - (double) (intelligence + experience) / 1500);
     }
 
     /**
@@ -33,8 +34,8 @@ public class Economist extends Minister {
     @Override
     public int collectTax(City city) {
         // TODO
+        return Math.round(1.5f * (float) (super.collectTax(city)));
     }
-
 
     /**
      * Economists get a bonus when doing crops improvements
@@ -62,5 +63,8 @@ public class Economist extends Minister {
     @Override
     public String toString() {
         // TODO
+        String readyOrDone = isReady() ? "READY" : "DONE";
+        return (String.format("Economist | intelligence: %d | experience: %d | leadership: %d | %s",
+                intelligence, experience, leadership, readyOrDone));
     }
 }

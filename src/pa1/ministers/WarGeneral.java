@@ -1,6 +1,5 @@
 package pa1.ministers;
 
-
 import pa1.City;
 import pa1.Cost;
 import pa1.Player;
@@ -10,7 +9,6 @@ import pa1.technologies.Technology;
 import java.util.List;
 
 public class WarGeneral extends Minister {
-
     /**
      * Calls the superclass' constructor
      *
@@ -20,6 +18,7 @@ public class WarGeneral extends Minister {
      */
     public WarGeneral(int intelligence, int experience, int leadership) {
         // TODO
+        super(intelligence, experience, leadership);
     }
 
     /**
@@ -29,6 +28,7 @@ public class WarGeneral extends Minister {
     @Override
     public int collectProductionPoints(City city) {
         // TODO
+        return Math.round(1.5f * (float) (super.collectProductionPoints(city)));
     }
 
     /**
@@ -45,8 +45,13 @@ public class WarGeneral extends Minister {
     @Override
     public void recruitTroops(Player player, City city) throws TooPoorException {
         // TODO
+        if (player.getGold() > 500) {
+            player.addGold(-500);
+            city.addTroops(50 + Math.round((float) leadership * 0.2f));
+        } else {
+            /* ... */
+        }
     }
-
 
     /**
      * WarGeneral gets attack bonus when attacking a city.
@@ -78,5 +83,8 @@ public class WarGeneral extends Minister {
     @Override
     public String toString() {
         // TODO
+        String readyOrDone = isReady() ? "READY" : "DONE";
+        return (String.format("WarGeneral | intelligence: %d | experience: %d | leadership: %d | %s",
+                intelligence, experience, leadership, readyOrDone));
     }
 }

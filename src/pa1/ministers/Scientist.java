@@ -1,10 +1,8 @@
 package pa1.ministers;
 
-
 import pa1.City;
 
 public class Scientist extends Minister {
-
     /**
      * Calls the superclass' constructor
      *
@@ -14,8 +12,8 @@ public class Scientist extends Minister {
      */
     public Scientist(int intelligence, int experience, int leadership) {
         // TODO
+        super(intelligence, experience, leadership);
     }
-
 
     /**
      * @return tech discount rate equals to 1 - (intelligence + experience) / 1500
@@ -23,6 +21,7 @@ public class Scientist extends Minister {
     @Override
     public double getTechDiscountRate() {
         // TODO
+        return (1 - (double) (intelligence + experience) / 1500);
     }
 
     /**
@@ -32,6 +31,7 @@ public class Scientist extends Minister {
     @Override
     public int collectSciencePoints(City city) {
         // TODO
+        return Math.round(1.5f * (float) (super.collectSciencePoints(city)));
     }
 
     /**
@@ -44,5 +44,8 @@ public class Scientist extends Minister {
     @Override
     public String toString() {
         // TODO
+        String readyOrDone = isReady() ? "READY" : "DONE";
+        return (String.format("Scientist | intelligence: %d | experience: %d | leadership: %d | %s",
+                intelligence, experience, leadership, readyOrDone));
     }
 }
