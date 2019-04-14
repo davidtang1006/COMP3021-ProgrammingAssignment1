@@ -4,15 +4,19 @@ package pa1;
  * A class that represents a city in the game
  */
 public class City {
-
     // TODO: define instance variables according to the UML
     // Metadata
-
     // Attributes
+    final private int id;
+    final private String name;
+    private int population;
+    private int troops;
+    private int cropYields;
+    private int banks = 0;
+    private int roads = 0;
+    private int universities = 0;
 
     // Improvements
-
-
     public City(int id, String name, int population, int troops, int cropYields) {
         this.id = id;
         this.name = name;
@@ -26,6 +30,7 @@ public class City {
      */
     public void addBank() {
         // TODO
+        banks++;
     }
 
     /**
@@ -33,6 +38,7 @@ public class City {
      */
     public void addRoad() {
         // TODO
+        roads++;
     }
 
     /**
@@ -40,6 +46,7 @@ public class City {
      */
     public void addUniversity() {
         // TODO
+        universities++;
     }
 
     /**
@@ -50,6 +57,11 @@ public class City {
      */
     public void addTroops(int increment) {
         // TODO
+        if (increment >= 0) {
+            troops += increment;
+        } else {
+            decreaseTroops(-increment);
+        }
     }
 
     /**
@@ -60,6 +72,8 @@ public class City {
      */
     public void decreaseTroops(int decrement) {
         // TODO
+        troops -= decrement;
+        troops = Math.max(0, troops);
     }
 
     /**
@@ -69,8 +83,8 @@ public class City {
      */
     public void improveCrops(int addition) {
         // TODO
+        cropYields += addition;
     }
-
 
     /**
      * Checks whether two cities are equal
@@ -83,6 +97,11 @@ public class City {
     @Override
     public boolean equals(Object o) {
         // TODO
+        if (o instanceof City) {
+            City anotherCity = (City) o;
+            return anotherCity.getId() == id;
+        }
+        return false;
     }
 
     /**
@@ -94,6 +113,9 @@ public class City {
      */
     public void growAtTurnEnd() {
         // TODO
+        long increment = Math.max(0, Math.round(getExcessCrops() * 0.5));
+        System.out.println(String.format("Turn end: %s's population has grown by %d",
+                name, increment));
     }
 
     /**
@@ -111,6 +133,15 @@ public class City {
      */
     public void invokeRandomEvent(double rand) {
         // TODO
+        if (rand <= 0.4) {
+            // Disaster happens
+            population = Math.round((float) population / 2);
+            System.out.println(String.format("A disaster in %s has happened, population was reduced significantly", name));
+        } else if ((rand > 0.4) && (rand <= 0.8)) {
+            // Baby boom happens
+            population = Math.round((float) population * 1.5f);
+            System.out.println(String.format("A baby boom in %s has happened, population was increased significantly", name));
+        }
     }
 
     /**
@@ -121,6 +152,7 @@ public class City {
      */
     public Cost getBankCost() {
         // TODO
+        return new Cost((banks + 1) * 400, (banks + 1) * 400, 0);
     }
 
     /**
@@ -131,6 +163,7 @@ public class City {
      */
     public Cost getRoadCost() {
         // TODO
+        return new Cost(((roads) + 1) * 100, ((roads) + 1) * 100, 0);
     }
 
     /**
@@ -141,6 +174,7 @@ public class City {
      */
     public Cost getUniversityCost() {
         // TODO
+        return new Cost((universities + 1) * 1500, (universities + 1) * 1500, 0);
     }
 
     /**
@@ -150,6 +184,7 @@ public class City {
      */
     public int getExcessCrops() {
         // TODO
+        return cropYields - population - 2 * troops;
     }
 
     public int getId() {
