@@ -15,7 +15,6 @@ import java.util.List;
  * as well as the player's assets such as ministers, cities, and technologies.
  */
 public class Player {
-
     // Assets
     private final List<Minister> ministers = new ArrayList<>();
     private final List<City> cities = new ArrayList<>();
@@ -41,6 +40,10 @@ public class Player {
         technologies.add(new ManufacturingTech());
 
         // TODO: complete initialization of member variables
+        this.name = name;
+        this.gold = gold;
+        this.sciencePoint = science;
+        this.productionPoint = production;
     }
 
     @Override
@@ -124,6 +127,7 @@ public class Player {
      */
     public boolean hasCity(City city) {
         // TODO
+        return (cities.contains(city));
     }
 
     /**
@@ -133,6 +137,7 @@ public class Player {
      */
     public boolean hasAnyCity() {
         // TODO
+        return (!cities.isEmpty());
     }
 
     /**
@@ -140,11 +145,15 @@ public class Player {
      */
     public boolean hasReadyMinister() {
         // TODO
+        for (Minister minister : ministers) {
+            if (minister.isReady()) {
+                return true;
+            }
+        }
+        return false;
     }
 
-
     // Trivial getters
-
     public List<City> getCities() {
         return cities;
     }

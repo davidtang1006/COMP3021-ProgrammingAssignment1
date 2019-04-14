@@ -26,7 +26,7 @@ public class GameEngine {
         // TODO
         int numPlayersLeft = 0;
         for (Player player : gameMap.getPlayers()) {
-            if (!player.getCities().isEmpty()) {
+            if (player.hasAnyCity()) {
                 numPlayersLeft++;
             }
         }
@@ -42,7 +42,7 @@ public class GameEngine {
     public Player getWinner() {
         // TODO
         for (Player player : gameMap.getPlayers()) {
-            if (!player.getCities().isEmpty()) {
+            if (player.hasAnyCity()) {
                 return player;
             }
         }
