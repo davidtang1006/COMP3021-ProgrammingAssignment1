@@ -17,7 +17,6 @@ import java.util.List;
 public abstract class Minister {
     // Attributes
     protected final int intelligence, experience, leadership;
-
     private boolean isReady = false;
 
     /**
@@ -38,6 +37,7 @@ public abstract class Minister {
      */
     public boolean isReady() {
         // TODO
+        return isReady;
     }
 
     /**
@@ -45,6 +45,7 @@ public abstract class Minister {
      */
     public void beginTurn() {
         // TODO
+        isReady = true;
     }
 
     /**
@@ -52,6 +53,7 @@ public abstract class Minister {
      */
     public void endTurn() {
         // TODO
+        isReady = false;
     }
 
     /**
@@ -63,6 +65,9 @@ public abstract class Minister {
      */
     public int collectTax(City city) {
         // TODO
+        int a = city.getPopulation() + experience + leadership;
+        int b = city.getBanks() + 1;
+        return Math.round( a * b * 0.2f);
     }
 
     /**
@@ -74,6 +79,9 @@ public abstract class Minister {
      */
     public int collectSciencePoints(City city) {
         // TODO
+        int a = city.getPopulation() + experience + intelligence;
+        int b = city.getUniversities() + 1;
+        return Math.round( a * b * 0.2f);
     }
 
     /**
@@ -85,6 +93,9 @@ public abstract class Minister {
      */
     public int collectProductionPoints(City city) {
         // TODO
+        int a = city.getPopulation() + intelligence + leadership;
+        int b = city.getRoads() + 1;
+        return Math.round( a * b * 0.2f);
     }
 
     /**
@@ -106,6 +117,16 @@ public abstract class Minister {
      */
     public void buildBank(Player player, City city) throws TooPoorException {
         // TODO
+        Cost costOfBuilding = city.getBankCost().getDiscountedCost(getImprovementDiscountRate()); // 1
+        if ((player.getGold() < costOfBuilding.getGold()) ||
+                (player.getProductionPoint() < costOfBuilding.getProduction())) { // 2
+            throw new TooPoorException(player, costOfBuilding); // 3
+        } else {
+            // 4
+            player.decreaseGold(costOfBuilding.getGold());
+            player.decreaseProductionPoint(costOfBuilding.getProduction());
+        }
+        city.addBank(); // 5
     }
 
     /**
@@ -127,6 +148,15 @@ public abstract class Minister {
      */
     public void buildRoad(Player player, City city) throws TooPoorException {
         // TODO
+        Cost costOfBuilding = city.getRoadCost().getDiscountedCost(getImprovementDiscountRate());
+        if ((player.getGold() < costOfBuilding.getGold()) ||
+                (player.getProductionPoint() < costOfBuilding.getProduction())) {
+            throw new TooPoorException(player, costOfBuilding);
+        } else {
+            player.decreaseGold(costOfBuilding.getGold());
+            player.decreaseProductionPoint(costOfBuilding.getProduction());
+        }
+        city.addRoad();
     }
 
     /**
@@ -148,6 +178,15 @@ public abstract class Minister {
      */
     public void buildUniversity(Player player, City city) throws TooPoorException {
         // TODO
+        Cost costOfBuilding = city.getUniversityCost().getDiscountedCost(getImprovementDiscountRate());
+        if ((player.getGold() < costOfBuilding.getGold()) ||
+                (player.getProductionPoint() < costOfBuilding.getProduction())) {
+            throw new TooPoorException(player, costOfBuilding);
+        } else {
+            player.decreaseGold(costOfBuilding.getGold());
+            player.decreaseProductionPoint(costOfBuilding.getProduction());
+        }
+        city.addUniversity();
     }
 
     /**
@@ -168,6 +207,18 @@ public abstract class Minister {
      */
     public void attackCity(City attacker, City defender, int attackingTroops, List<Technology> technologyList) {
         // TODO
+        int attackerLoss = Math.min(attackingTroops, defender.getTroops());
+        attacker.decreaseTroops(attackerLoss);
+
+        float productOfBonuses = 1;
+        for (Technology technology : technologyList) {
+            productOfBonuses *= technology.getAttackBonus();
+        }
+        int defenderLoss = Math.round(0.8f * attackingTroops * productOfBonuses);
+        defender.decreaseTroops(defenderLoss);
+
+        System.out.println(String.format("%s loses %d troops while attacking", attacker.getName(), attackerLoss));
+        System.out.println(String.format("%s loses %d troops while defending", defender.getName(), defenderLoss));
     }
 
     /**
@@ -233,6 +284,17 @@ public abstract class Minister {
      */
     public void upgradeTech(Player player, Technology technology) throws TooPoorException {
         // TODO
+        Cost techUpgradingCost = technology.getUpgradeCost().getDiscountedCost(getTechDiscountRate());
+        if ((player.getGold() < techUpgradingCost.getGold()) ||
+                (player.getProductionPoint() < techUpgradingCost.getProduction()) ||
+                (player.getSciencePoint() < techUpgradingCost.getScience())) {
+            throw new TooPoorException(player, techUpgradingCost);
+        } else {
+            player.decreaseGold(techUpgradingCost.getGold());
+            player.decreaseProductionPoint(techUpgradingCost.getProduction());
+            player.decreaseSciencePoint(techUpgradingCost.getScience());
+        }
+        technology.addLevel();
     }
 
     /**
@@ -249,6 +311,9 @@ public abstract class Minister {
      */
     public void spyOnNeighbors(City city, GameMap map) {
         // TODO
+        for (City c : map.getNeighboringCities(city)) {
+            System.out.println(c); // toString() is automatically called
+        }
     }
 
     /**

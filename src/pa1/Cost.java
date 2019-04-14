@@ -1,6 +1,5 @@
 package pa1;
 
-
 /**
  * An immutable class that encapsulates the gold, science and production costs.
  */
@@ -34,6 +33,9 @@ public class Cost {
      */
     public Cost getDiscountedCost(double rate) {
         // TODO
+        return new Cost(Math.round(gold * (float) rate),
+                Math.round(production * (float) rate),
+                Math.round(science * (float) rate));
     }
 
     /**
@@ -49,5 +51,12 @@ public class Cost {
     @Override
     public boolean equals(Object obj) {
         // TODO
+        if (obj instanceof Cost) {
+            Cost anotherCost = (Cost) obj;
+            return (gold == anotherCost.gold) &&
+                    (production == anotherCost.production) &&
+                    (science == anotherCost.science);
+        }
+        return false;
     }
 }
