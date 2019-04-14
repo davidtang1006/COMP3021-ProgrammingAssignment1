@@ -24,12 +24,14 @@ public class GameEngine {
      */
     public boolean isGameOver() {
         // TODO
+        int numPlayersLeft = 0;
         for (Player player : gameMap.getPlayers()) {
-            if (player.getCities().isEmpty()) {
-                return true;
+            if (!player.getCities().isEmpty()) {
+                numPlayersLeft++;
             }
         }
-        return false;
+
+        return numPlayersLeft == 1;
     }
 
     /**
