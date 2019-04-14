@@ -6,7 +6,6 @@ import pa1.Cost;
  * An abstract class that represents in-game technology
  */
 public abstract class Technology {
-
     private int level;
 
     /**

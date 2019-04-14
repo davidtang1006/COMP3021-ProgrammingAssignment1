@@ -3,13 +3,13 @@ package pa1.technologies;
 import pa1.Cost;
 
 public class TradingTech extends Technology {
-
     /**
      * @return gold bonus equal to 1 + (level * 0.5);
      */
     @Override
     public double getGoldBonus() {
         // TODO
+        return (1 + (super.getLevel() * 0.5f));
     }
 
     /**
@@ -21,6 +21,10 @@ public class TradingTech extends Technology {
     @Override
     public Cost getUpgradeCost() {
         // TODO
+        int gold = (super.getLevel() + 1) * 1000;
+        int production = (super.getLevel() + 1) * 1000;
+        int science = (super.getLevel() + 1) * 1000;
+        return new Cost(gold, production, science);
     }
 
     /**
@@ -32,5 +36,6 @@ public class TradingTech extends Technology {
     @Override
     public String toString() {
         // TODO
+        return String.format("TradingTech | level: %d | gold bonus: %.2f", super.getLevel(), getGoldBonus());
     }
 }

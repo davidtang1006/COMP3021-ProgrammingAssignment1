@@ -67,7 +67,7 @@ public abstract class Minister {
         // TODO
         int a = city.getPopulation() + experience + leadership;
         int b = city.getBanks() + 1;
-        return Math.round( a * b * 0.2f);
+        return Math.round(a * b * 0.2f);
     }
 
     /**
@@ -81,7 +81,7 @@ public abstract class Minister {
         // TODO
         int a = city.getPopulation() + experience + intelligence;
         int b = city.getUniversities() + 1;
-        return Math.round( a * b * 0.2f);
+        return Math.round(a * b * 0.2f);
     }
 
     /**
@@ -95,7 +95,7 @@ public abstract class Minister {
         // TODO
         int a = city.getPopulation() + intelligence + leadership;
         int b = city.getRoads() + 1;
-        return Math.round( a * b * 0.2f);
+        return Math.round(a * b * 0.2f);
     }
 
     /**
@@ -195,7 +195,7 @@ public abstract class Minister {
      * Defending city loses round(0.8 * # of attacking troops * product of tech attack bonuses)
      * <p>
      * This method is overridden in the WarGeneral class
-     *
+     * <p>
      * Print the following messages:
      * "[attacker city name] loses [number of troops lost by attacker] troops while attacking"
      * "[defender city name] loses [number of troops lost by defender] troops while defending"
