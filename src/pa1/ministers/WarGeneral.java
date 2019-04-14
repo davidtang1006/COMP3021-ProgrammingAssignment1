@@ -72,6 +72,20 @@ public class WarGeneral extends Minister {
     @Override
     public void attackCity(City attacker, City defender, int troops, List<Technology> technologyList) {
         // TODO
+        float bonusMultiplier = 1 + (intelligence + experience + leadership) / 1500f;
+
+        int attackerLoss = Math.min(troops, defender.getTroops());
+        attacker.decreaseTroops(attackerLoss);
+
+        float productOfBonuses = 1;
+        for (Technology technology : technologyList) {
+            productOfBonuses *= technology.getAttackBonus();
+        }
+        int defenderLoss = Math.round(bonusMultiplier * troops * productOfBonuses);
+        defender.decreaseTroops(defenderLoss);
+
+        System.out.println(String.format("%s loses %d troops while attacking", attacker.getName(), attackerLoss));
+        System.out.println(String.format("%s loses %d troops while defending", defender.getName(), defenderLoss));
     }
 
     /**

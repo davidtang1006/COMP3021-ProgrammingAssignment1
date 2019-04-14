@@ -58,7 +58,7 @@ public abstract class Minister {
 
     /**
      * Collect gold from a city
-     * amount collected = (city population + minister experience + minister leadership) * (# of banks  + 1) * 0.2
+     * amount collected = (city population + minister experience + minister leadership) * (# of banks + 1) * 0.2
      *
      * @param city to collect gold from
      * @return amount of gold collected
@@ -72,7 +72,7 @@ public abstract class Minister {
 
     /**
      * Collect science points from a city
-     * amount collected = (city population + minister experience + minister intelligence) * (# of universities  + 1) * 0.2
+     * amount collected = (city population + minister experience + minister intelligence) * (# of universities + 1) * 0.2
      *
      * @param city to collect science points from
      * @return amount of science points collected
@@ -86,7 +86,7 @@ public abstract class Minister {
 
     /**
      * Collect production points from a city
-     * amount collected = (city population + minister intelligence + minister leadership) * (# of roads  + 1) * 0.2
+     * amount collected = (city population + minister intelligence + minister leadership) * (# of roads + 1) * 0.2
      *
      * @param city to collect production points from
      * @return amount of production points collected
