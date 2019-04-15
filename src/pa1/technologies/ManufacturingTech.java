@@ -37,6 +37,7 @@ public class ManufacturingTech extends Technology {
     @Override
     public String toString() {
         // TODO
-        return String.format("ManufacturingTech | level: %d | gold bonus: %.2f", getLevel(), getProductionBonus());
+        return String.format("ManufacturingTech | level: %d | production bonus: %.2f",
+                getLevel(), getProductionBonus());
     }
 }

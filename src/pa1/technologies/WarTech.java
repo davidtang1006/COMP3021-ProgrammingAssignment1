@@ -11,6 +11,7 @@ public class WarTech extends Technology {
     @Override
     public double getAttackBonus() {
         // TODO
+        return ((1 + getLevel()) * 0.5);
     }
 
     /**
@@ -23,6 +24,9 @@ public class WarTech extends Technology {
     @Override
     public Cost getUpgradeCost() {
         // TODO
+        int gold = (getLevel() + 1) * 1000;
+        int science = (getLevel() + 1) * 1000;
+        return new Cost(gold, 0, science);
     }
 
     /**
@@ -34,5 +38,6 @@ public class WarTech extends Technology {
     @Override
     public String toString() {
         // TODO
+        return String.format("WarTech | level: %d | attack bonus: %.2f", getLevel(), getAttackBonus());
     }
 }

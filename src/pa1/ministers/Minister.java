@@ -340,4 +340,3 @@ public abstract class Minister {
         return 1;
     }
 }
-
