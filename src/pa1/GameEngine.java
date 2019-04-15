@@ -67,7 +67,6 @@ public class GameEngine {
     private void processPlayersTurn() {
         turns++;
         for (Player player : gameMap.getPlayers()) {
-
             if (player.hasAnyCity()) {
                 System.out.printf("\n\t--- Year %d | %s's turn ---\n\n", turns, player.getName());
                 //printMap();

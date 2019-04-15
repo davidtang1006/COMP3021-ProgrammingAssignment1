@@ -136,11 +136,11 @@ public class City {
         if (rand <= 0.4) {
             // Disaster happens
             population = Math.round((float) population / 2);
-            System.out.println(String.format("A disaster in %s has happened, population was reduced significantly", name));
+            System.out.println(String.format("Random event: A disaster in %s has happened, population was reduced significantly", name));
         } else if ((rand > 0.4) && (rand <= 0.8)) {
             // Baby boom happens
             population = Math.round((float) population * 1.5f);
-            System.out.println(String.format("A baby boom in %s has happened, population was increased significantly", name));
+            System.out.println(String.format("Random event: A baby boom in %s has happened, population was increased significantly", name));
         }
     }
 
@@ -228,5 +228,4 @@ public class City {
         return String.format("%s | population: %d | troops: %d | crop yields: %d | excess crops: %d | # of banks: %d | # of roads: %d | # of universities: %d",
                 name, population, troops, cropYields, getExcessCrops(), banks, roads, universities);
     }
-
 }
