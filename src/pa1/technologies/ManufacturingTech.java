@@ -1,6 +1,5 @@
 package pa1.technologies;
 
-
 import pa1.Cost;
 
 public class ManufacturingTech extends Technology {
@@ -11,6 +10,7 @@ public class ManufacturingTech extends Technology {
     @Override
     public double getProductionBonus() {
         // TODO
+        return ((1 + getLevel()) * 0.5);
     }
 
     /**
@@ -23,6 +23,9 @@ public class ManufacturingTech extends Technology {
     @Override
     public Cost getUpgradeCost() {
         // TODO
+        int gold = (getLevel() + 1) * 1000;
+        int production = (getLevel() + 1) * 1000;
+        return new Cost(gold, production, 0);
     }
 
     /**
@@ -34,5 +37,6 @@ public class ManufacturingTech extends Technology {
     @Override
     public String toString() {
         // TODO
+        return String.format("ManufacturingTech | level: %d | gold bonus: %.2f", getLevel(), getProductionBonus());
     }
 }

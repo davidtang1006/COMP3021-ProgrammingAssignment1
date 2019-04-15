@@ -9,7 +9,7 @@ public class TradingTech extends Technology {
     @Override
     public double getGoldBonus() {
         // TODO
-        return (1 + (super.getLevel() * 0.5f));
+        return (1 + (getLevel() * 0.5f));
     }
 
     /**
@@ -21,9 +21,9 @@ public class TradingTech extends Technology {
     @Override
     public Cost getUpgradeCost() {
         // TODO
-        int gold = (super.getLevel() + 1) * 1000;
-        int production = (super.getLevel() + 1) * 1000;
-        int science = (super.getLevel() + 1) * 1000;
+        int gold = (getLevel() + 1) * 1000;
+        int production = (getLevel() + 1) * 1000;
+        int science = (getLevel() + 1) * 1000;
         return new Cost(gold, production, science);
     }
 
@@ -36,6 +36,6 @@ public class TradingTech extends Technology {
     @Override
     public String toString() {
         // TODO
-        return String.format("TradingTech | level: %d | gold bonus: %.2f", super.getLevel(), getGoldBonus());
+        return String.format("TradingTech | level: %d | gold bonus: %.2f", getLevel(), getGoldBonus());
     }
 }
