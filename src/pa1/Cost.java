@@ -45,7 +45,7 @@ public class Cost {
      * Return false if obj is not an instance of Cost
      *
      * @param obj
-     * @return
+     * @return boolean
      */
     @Override
     public boolean equals(Object obj) {

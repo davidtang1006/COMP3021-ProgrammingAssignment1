@@ -30,7 +30,7 @@ public class TooPoorException extends Exception {
      * Constructs an error message in the form:
      * "need (%d golds, %d production points, %d science points), have (%d golds, %d production points, %d science points)"
      *
-     * @return
+     * @return String
      */
     @Override
     public String getMessage() {
