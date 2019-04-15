@@ -214,7 +214,7 @@ public abstract class Minister {
         for (Technology technology : technologyList) {
             productOfBonuses *= technology.getAttackBonus();
         }
-        int defenderLoss = Math.round(0.8f * attackingTroops * productOfBonuses);
+        int defenderLoss = Math.min(defender.getTroops(), Math.round(0.8f * attackingTroops * productOfBonuses));
         defender.decreaseTroops(defenderLoss);
 
         System.out.println(String.format("%s loses %d troops while attacking", attacker.getName(), attackerLoss));

@@ -11,7 +11,7 @@ public class WarTech extends Technology {
     @Override
     public double getAttackBonus() {
         // TODO
-        return ((1 + getLevel()) * 0.5);
+        return (1 + getLevel() * 0.5);
     }
 
     /**

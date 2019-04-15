@@ -33,9 +33,13 @@ public class GameMap {
         File file = new File(filename);
         Scanner reader = new Scanner(file);
         reader.useDelimiter("\\s|,");
+        cityLocations = new HashMap<>();
+        connectedCities = new HashMap<>();
+
         width = reader.nextInt();
         height = reader.nextInt();
         int numCities = reader.nextInt();
+        reader.nextLine();
 
         for (int i = 0; i < numCities; i++) {
             int cityID = reader.nextInt();
@@ -57,7 +61,7 @@ public class GameMap {
             // The capacity of ArrayList grows automatically
 
             int cityID = stringReader.nextInt();
-            if (stringReader.hasNextInt()) {
+            while (stringReader.hasNextInt()) {
                 tempList.add(stringReader.nextInt());
             }
 

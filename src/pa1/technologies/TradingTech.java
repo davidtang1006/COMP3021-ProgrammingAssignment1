@@ -9,7 +9,7 @@ public class TradingTech extends Technology {
     @Override
     public double getGoldBonus() {
         // TODO
-        return (1 + (getLevel() * 0.5f));
+        return (1 + getLevel() * 0.5);
     }
 
     /**

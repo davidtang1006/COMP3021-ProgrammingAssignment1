@@ -10,7 +10,7 @@ public class ManufacturingTech extends Technology {
     @Override
     public double getProductionBonus() {
         // TODO
-        return ((1 + getLevel()) * 0.5);
+        return (1 + getLevel() * 0.5);
     }
 
     /**

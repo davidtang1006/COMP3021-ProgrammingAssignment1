@@ -81,7 +81,7 @@ public class WarGeneral extends Minister {
         for (Technology technology : technologyList) {
             productOfBonuses *= technology.getAttackBonus();
         }
-        int defenderLoss = Math.round(bonusMultiplier * troops * productOfBonuses);
+        int defenderLoss = Math.min(defender.getTroops(), Math.round(bonusMultiplier * troops * productOfBonuses));
         defender.decreaseTroops(defenderLoss);
 
         System.out.println(String.format("%s loses %d troops while attacking", attacker.getName(), attackerLoss));
